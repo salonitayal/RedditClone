@@ -1,0 +1,22 @@
+<h1>Make a Post</h1>
+
+{% if error %}
+<p style="color:rgb(122, 10, 10)">{{ error }}</p>
+{% endif %}
+<br/>
+<form method="POST" action="{% url 'posts:create' %}">
+    {% csrf_token %} 
+
+    Title : 
+    <br/>
+    <input type="text" name="title" />
+    <br/>
+    URL :
+    <br/>
+    <input type="text" name="url" />
+    <br/>
+    <br/>
+    <input type="submit" value="Post" />
+    <br/>
+
+</form>

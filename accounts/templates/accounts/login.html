@@ -1,0 +1,26 @@
+<h1>Login</h1>
+
+{% if error %}
+<p style="color:rgb(122, 10, 10)">{{ error }}</p>
+{% endif %}
+<br/>
+<br/>
+<form method="POST" action="{% url 'accounts:login' %}">
+    {% csrf_token %} 
+
+    {% if request.GET.next %}
+    <input type="hidden" name="next" value="{{ request.GET.next }}"
+    {% endif %}
+    Username : 
+    <br/>
+    <input type="text" name="username" />
+    <br/>
+    Password : 
+    <br/>
+    <input type="password" name="password" />
+    <br/>
+    <br/>
+    <input type="submit" value="Login" />
+    <br/>
+
+</form>
