@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
 <h1>Make a Post</h1>
 
 {% if error %}
@@ -16,7 +20,9 @@
     <input type="text" name="url" />
     <br/>
     <br/>
-    <input type="submit" value="Post" />
+    <input class="btn btn-primary" type="submit" value="Post" />
     <br/>
 
 </form>
+
+{% endblock %}

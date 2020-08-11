@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Reddit Clone </title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    </head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-color" style="background-color: rgb(110, 15, 62);">
+      <a class="navbar-brand" href="{% url 'home' %}" style="color:whitesmoke;font-weight: 800; font-size: 50px;">Reddit Clone</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="nav navbar-nav ml-auto">
+            {% if user.is_authenticated %}           
+                <li><a class="nav-link" href="#" onClick="document.getElementById('logout').submit()">LogOut</a></li>
+                  <form id="logout" method="POST" action="{% url 'accounts:logout' %}">
+                      {% csrf_token %} 
+                      <input type="hidden">
+                  </form>
+            {% else %}
+              <li><a class="nav-link" href="{% url 'accounts:signup' %}">Sign Up</a></li>
+              <li><a class="nav-link" href="{% url 'accounts:login' %}">Login </a></li> 
+            {% endif %}
+          </ul>
+        </div>
+      </nav>
+    
+    <div class="container bg-light">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>
+
+
+

@@ -1,19 +1,31 @@
-<h1>Home Page</h1> 
+{% extends 'base.html' %}
 
-<a href="{% url 'posts:create' %}">New Post</a>
+{% block content %}
+<h3> Welcome to Home Page</h3> 
+
+<a href="{% url 'posts:create' %}" class="btn btn-primary btn-lg bg-info">New Post !</a>
 
 <br/>
 <br/>
 {% for post in posts.all %}
-<form method="POST" action="{% url 'posts:upvote' post.id %}">
+
+<table>
+    <tr>
+        <td><a class="nav-link" href="#" onClick="document.getElementById('upvote{{ post.id }}').submit()"><i class='fas fa-angle-double-up' style='font-size:20px'></i></a></td><td> {{ post.votes_total }} </td><td><a class="nav-link" href="#" onClick="document.getElementById('downvote{{ post.id }}').submit()"><i class='fas fa-angle-double-down' style='font-size:20px'></i></a></td>
+        <td style="padding-left: 20px;"><a href="{{ post.url }}">{{ post.title }}</a><br/>{{ post.pub_date }} by {{ post.author }}</td>
+    </tr>
+</table>
+
+<form id="upvote{{ post.id }}" method="POST" action="{% url 'posts:upvote' post.id %}">
     {% csrf_token %}
-    <input type="submit" value="UP">
+    <input type="hidden">
 </form> 
-    {{ post.votes_total }} 
-<form method="POST" action="{% url 'posts:downvote' post.id %}">
+<form id="downvote{{ post.id }}" method="POST" action="{% url 'posts:downvote' post.id %}">
     {% csrf_token %}
-    <input type="submit" value="DOWN">
-</form>  - <a href="{{ post.url }}">{{ post.title }}</a>
+    <input type="hidden">
+</form>  
 <br/>
-{{ post.pub_date }} by {{ post.author }}<br/>
+<br/>
+
 {% endfor %}
+{% endblock %}
